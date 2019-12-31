@@ -11,7 +11,11 @@ function createWindow() {
     width: 1000,
     height: 750,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      // javascript: true,
+      // plugins: true,
+      nodeIntegration: true, // 是否集成 Nodejs
+      // webSecurity: false,
+      preload: path.join(__dirname, './renderer.js') // 但预加载的 js 文件内仍可以使用 Nodejs 的 API
     }
   })
   // 载入页面
