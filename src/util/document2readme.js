@@ -1,53 +1,22 @@
-let fs = require('fs')
-// Readme.md 的标题
-let title = "# 计算机基础知识笔记"
-// 目标文件夹
-let pre = `E:/CSY/CCSY/基础/cs-foundation`
-// 需要被忽略的文件夹名 or 文件名
-let ignore = {
-  document: ['.git', 'assets'],
-  filename: ['README.md']
-}
-// 存储文件目录结构
-// let result = {}
-// 遍历文件目录并存储到变量 result
-// ScanDir(result = {}, pre, '')
-// let data = title + '\n'
-// for (let i in result) {
-//   let list = ''
-//   for (let arr of result[i]) {
-//     list += `- [${arr.name}](${arr.path})\n`
-//   }
-//   data += `
-// <details>
-//   <summary>${i}</summary>
-  
-// ${list}
-// </details>
-//   `
-// }
-
-// createReadme(data)
-
-
+let fs = window.fs
 
 // 文件目录结构存储在全局变量result
 // attr 是 文件名,即 result 的属性名
-export function ScanDir(result, path, attr) {
+export function ScanDir(result, path, attr, ignore, prePath) {
   // 当前的path 是否为文件
   const isFile = fs.statSync(path).isFile()
   // 假如是文件
   if (isFile) {
     // 判断是否为应忽略的文件，若否:则
-    !checkIgnore(attr, isFile) && result[getDocumentNameByFilename(path, attr)].push({
+    !checkIgnore(attr, isFile, ignore) && result[getDocumentNameByFilename(path, attr)].push({
       name: attr.slice(0, attr.lastIndexOf('.')),
-      path: path.replace(pre, '.')
+      path: path.replace(prePath, '.')
     });
     return
   }
   try {
     // 若为应忽略的文件夹，则
-    if (checkIgnore(attr, isFile)) {
+    if (attr !== '' && checkIgnore(attr, isFile, ignore)) {
       delete result[attr]
       return
     };
@@ -58,33 +27,63 @@ export function ScanDir(result, path, attr) {
       if (!result[documentName] && !fs.statSync(documentPath).isFile()) {
         result[documentName] = [];
       }
-      ScanDir(documentPath, documentName)
+      ScanDir(result, documentPath, documentName, ignore, prePath)
     })
   } catch (err) {
-    console.log('err!!!\n', err)
+    console.log('err during scan the dir !!!\n', err)
   }
 
   // 获取当前文件所处的文件夹名字
   function getDocumentNameByFilename(path, name) {
-    let pathWithoutFilename = path.slice(0, path.length - name.length - 1)
-    return pathWithoutFilename.slice(pathWithoutFilename.lastIndexOf('/') + 1)
+    try {
+      let pathWithoutFilename = path.slice(0, path.length - name.length - 1)
+      return pathWithoutFilename.slice(pathWithoutFilename.lastIndexOf('/') + 1)
+    } catch (err) { }
   }
   // 检查当前路径是否应忽略的文件夹 or 文件名
-  function checkIgnore(file, isFile) {
+  function checkIgnore(file, isFile, ignore) {
     if (isFile) {
-      return ignore.filename.includes(file)
+      return ignore.file.includes(file)
     } else {
       return ignore.document.includes(file)
     }
   }
 }
 
-// 创建并写入Readme.md 文件
-export function createReadme(data) {
-  let path = pre + '/README' + new Date().valueOf() + '.md'
-  return `${path}\n\n${data}`
-  // fs.writeFileSync(path, data, (err) => {
-  //   if (err) console.log('err in create Readme.md!!\n' + err)
-  //   else console.log(`succ at ${path}`)
-  // })
+// 将文件目录结果转换为文本
+export function result2Text(result, title) {
+  let data = title + '\n'
+  for (let i in result) {
+    let list = ''
+    for (let arr of result[i]) {
+      list += `- [${arr.name}](${arr.path})\n`
+    }
+    data += `
+<details>
+  <summary>${i}</summary>
+
+${list}
+</details>
+    `
+  }
+  return data
+}
+
+// 创建并将文本写入Readme.md 文件
+export function createReadme(data, prePath) {
+  let path = prePath + '/README' + '.md'
+  return new Promise((resolve, reject) => {
+    fs.writeFile(path, data, (err) => {
+      if (err) {
+        console.log('err in create Readme.md!!\n' + err)
+        reject(err)
+      }
+      resolve()
+    })
+  })
+
+  function getTimeString() {
+    let d = new Date()
+    return "" + d.getFullYear() + (d.getMonth() + 1) + d.getDate() + d.getHours() + d.getMinutes() + d.getSeconds()
+  }
 }
