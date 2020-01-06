@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import Content from '../Home/components/content.js'
 import { Form, Input, Button} from 'antd';
-import { ScanDir } from '../../util/document2readme.js'
+// import { ScanDir } from '../../util/document2readme.js'
 
-const electron = window.electron
+// const electron = window.electron
 class Doc2Readme extends Component {
   handleSubmit(e) {
     e.preventDefault()
     const ipcRenderer = window.electron.ipcRenderer;
     ipcRenderer.send('asynchronous-message', 'ping')
-    // this.props.form.validateFields((err, values) => {
-    //   console.log('mf')
-    // })
-    let r = {}
-    ScanDir(r, 'E:/CSY/CCSY/基础/cs-foundation', '')
-    console.log(r)
+    this.props.form.validateFields((err, values) => {
+      console.log('mf')
+    })
+    // let r = {}
+    // ScanDir(r, 'E:/CSY/CCSY/基础/cs-foundation', '')
+    // console.log(r)
   }
   render() {
     const { getFieldDecorator } = this.props.form
@@ -60,6 +60,4 @@ class Doc2Readme extends Component {
   }
 }
 
-// Form.create 后的组件才有 this.props.form
-// 才能使用 getFieldDecorator
 export default Form.create()(Doc2Readme)

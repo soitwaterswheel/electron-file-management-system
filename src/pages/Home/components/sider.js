@@ -11,9 +11,9 @@ class SiderPage extends Component {
   //   this.props.history.push(link)
   // }
 
-  render () {
+  render() {
     return (
-      <Sider width={250} style={{minHeight: '620px'}}>
+      <Sider width={250} style={{ minHeight: '620px' }}>
         <Menu
           mode="inline"
           defaultSelectedKeys={['1']}
@@ -25,6 +25,7 @@ class SiderPage extends Component {
             title={<span><Icon type="apartment" />Github</span>}
           >
             <Menu.Item style={menuitemStyle} onClick={() => { this.props.history.push('/doc2readme') }} key="1">文件目录结构转README.md</Menu.Item>
+            <Menu.Item style={menuitemStyle} onClick={() => { this.props.history.push('/test') }} key="2">测试.md</Menu.Item>
           </SubMenu>
           <SubMenu
             key="sub2"
@@ -49,11 +50,11 @@ let menuitemStyle = {
 }
 
 const mapState = () => ({
-  
+
 })
 
 const mapDispatch = () => ({
-  
+
 })
 
 
