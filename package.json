@@ -8,7 +8,31 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "dev": "npx nodemon --watch main.js --exec \"electron .\" | npm start"
+    "dev": "npx nodemon --watch main.js --exec \"electron .\" | npm start",
+    "dist": "electron-builder --win --x64"
+  },
+  "build": {
+    "productName": "electron-file-management",
+    "appId": "com.soitwater.management",
+    "copyright": "BSD",
+    "directories": {
+      "output": "./build"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ],
+      "icon": "public/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "./build/icons/icon.ico",
+      "uninstallerIcon": "./build/icons/icon.ico",
+      "installerHeaderIcon": "./build/icons/icon.ico"
+    }
   },
   "dependencies": {
     "@babel/core": "7.7.4",
@@ -19,7 +43,6 @@
     "@typescript-eslint/eslint-plugin": "^2.8.0",
     "@typescript-eslint/parser": "^2.8.0",
     "antd": "^3.26.5",
-    "axios": "^0.19.0",
     "babel-eslint": "10.0.3",
     "babel-jest": "^24.9.0",
     "babel-loader": "8.0.6",
@@ -162,10 +185,6 @@
     ]
   },
   "devDependencies": {
-    "babel-plugin-import": "^1.13.0",
-    "cross-env": "^6.0.3",
-    "devtron": "^1.4.0",
-    "electron-is-dev": "^1.1.0",
-    "electron-log": "^4.0.2"
+    "electron": "^7.1.7"
   }
 }
