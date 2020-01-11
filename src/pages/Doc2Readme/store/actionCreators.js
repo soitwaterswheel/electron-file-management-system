@@ -19,7 +19,7 @@ export const handleSaveReadme = (readmeText, prePath) => {
   }
 }
 
-export const handleAddIngore = (value) => ({
+export const handleAddIngore = (kind, name) => ({
   type: constants.FORM_ADD_IGNORE,
-  value
+  kind, name
 })

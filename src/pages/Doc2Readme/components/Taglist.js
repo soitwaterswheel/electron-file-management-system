@@ -2,23 +2,24 @@ import React from 'react';
 import { Tag } from 'antd';
 
 export default function Taglist(props) {
-  console.log(props)
+  let { list, kind, handleDeleteTag } = props
+
   return (
     <>
       {
-        props.document.map((item, index) => {
+        list.map((item, index) => {
           return (
-            <Tag color="orange" type="document" key={index} closable={index !== 0} onClose={props.handleDeleteTag.bind(null, 'document', index)}>{item}</Tag>
+            <Tag color={kind === 'folder' ? 'orange' : 'blue'} key={index} closable={index !== 0} onClose={handleDeleteTag.bind(null, kind, index)}>{item}</Tag>
           )
         })
       }
-      {
-        props.file.map((item, index) => {
+      {/* {
+        file.map((item, index) => {
           return (
             <Tag color="blue" type="file" key={index} closable={index !== 0} onClose={props.handleDeleteTag.bind(null, 'file', index)}>{item}</Tag>
           )
         })
-      }
+      } */}
     </>
   )
 }

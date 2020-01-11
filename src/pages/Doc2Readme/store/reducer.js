@@ -10,14 +10,10 @@ const defaultState = fromJS({
     showReadmeText: '',
     // 应忽略的文件名/文件夹名
     ignore: {
-      document: ['.git', 'assets'],
+      folder: ['.git', 'assets'],
       file: ['README.md']
     },
-    // 当前选择的类型：document|file
-    radioValue: 'document',
-    // 保存按钮是否可用
-    saveBtnDisabled: true,
-  }
+  },
 });
 
 export default (state = defaultState, action) => {
@@ -28,7 +24,7 @@ export default (state = defaultState, action) => {
       notification.open({ message: action.msg })
       return state
     case constants.FORM_ADD_IGNORE:
-      return state.get('formData').get('ignore').get(state.get('formData').get('radioValue')).push(action.value)
+      return state.get('formData').get('ignore').get(action.kind).push(action.name)
     default:
       return state;
   }
