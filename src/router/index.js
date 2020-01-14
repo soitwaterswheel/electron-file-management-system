@@ -7,6 +7,7 @@ import Sider from '../pages/Home/components/sider.js'
 import Content from '../pages/Home/components/content.js'
 import Doc2Readme from '../pages/Doc2Readme/index.js'
 import Test from '../pages/Test/index.js'
+import NovelQuery from '../pages/NovelQuery/index.js'
 
 const BasicRoute = () => (
   <BrowserRouter>
@@ -17,6 +18,7 @@ const BasicRoute = () => (
         <Route exact path="/" component={Content} />
         <Route exact path="/doc2readme" component={Doc2Readme} />
         <Route exact path="/test" component={Test} />
+        <Route exact path="/novel-query" component={NovelQuery} />
       </Layout>
     </Layout>
     {/* <Route exact path="/" component={Home} /> */}

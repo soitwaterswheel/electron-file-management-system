@@ -2,12 +2,12 @@
 /*滚动条样式 */
 /*整体 */ 
 ::-webkit-scrollbar {
-  width: 8px; 
+  width: 4px; 
   height: 1px; 
 } 
 /*滑块 */
 ::-webkit-scrollbar-thumb { 
-  border-radius   : 10px;
+  border-radius   : 2px;
   background-color: skyblue;
   background-image: -webkit-linear-gradient(
       45deg,
@@ -22,6 +22,6 @@
 /*背景 */
 ::-webkit-scrollbar-track { 
   background-color: #ededed; 
-  border-radius: 10px;
+  border-radius: 2px;
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2); 
 }

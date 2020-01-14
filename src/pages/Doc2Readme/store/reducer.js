@@ -24,7 +24,8 @@ export default (state = defaultState, action) => {
       notification.open({ message: action.msg })
       return state
     case constants.FORM_ADD_IGNORE:
-      return state.get('formData').get('ignore').get(action.kind).push(action.name)
+      let arg = ['formData', 'ignore', action.kind]
+      return state.setIn([...arg], state.getIn([...arg]).push(action.name))
     default:
       return state;
   }

@@ -7,31 +7,17 @@ const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 class SiderPage extends Component {
-  // handleMenuitem(link) {
-  //   this.props.history.push(link)
-  // }
 
   render() {
     return (
       <Sider width={250} style={{ minHeight: '620px' }}>
-        <Menu
-          mode="inline"
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
-          style={{ height: '100%', borderRight: 0 }}
-        >
-          <SubMenu
-            key="sub1"
-            title={<span><Icon type="apartment" />Github</span>}
-          >
-            <Menu.Item style={menuitemStyle} onClick={() => { this.props.history.push('/doc2readme') }} key="1">文件目录结构转README.md</Menu.Item>
-            <Menu.Item style={menuitemStyle} onClick={() => { this.props.history.push('/test') }} key="2">测试.md</Menu.Item>
+        <Menu mode="inline" defaultSelectedKeys={['doc2readme']} defaultOpenKeys={['sub1']} style={menuitemStyle}>
+          <SubMenu key="sub1" title={<span><Icon type="apartment" />Github</span>}>
+            <Menu.Item onClick={() => { this.props.history.push('/doc2readme') }} key="doc2readme">文件目录结构转README.md</Menu.Item>
+            <Menu.Item onClick={() => { this.props.history.push('/test') }} key="test">测试.md</Menu.Item>
           </SubMenu>
-          <SubMenu
-            key="sub2"
-            title={<span><Icon type="apartment" />subnav 2</span>}
-          >
-            <Menu.Item key="5">option5</Menu.Item>
+          <SubMenu key="sub2" title={<span><Icon type="apartment" />网页</span>}>
+            <Menu.Item onClick={() => { this.props.history.push('./novel-query') }} key="novelQuery">小说网页爬取</Menu.Item>
           </SubMenu>
           <SubMenu
             key="sub3"
@@ -46,7 +32,9 @@ class SiderPage extends Component {
 }
 
 let menuitemStyle = {
-  fontSize: '12px'
+  fontSize: '12px',
+  height: '100%',
+  borderRight: 0
 }
 
 const mapState = () => ({

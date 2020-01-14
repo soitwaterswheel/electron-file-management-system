@@ -1,10 +1,9 @@
 import { connect } from 'react-redux'
-import { fromJS } from 'immutable'
 import { actionCreators } from './store/index.js'
 import React, { Component } from 'react';
 
 import Content from '../Home/components/content.js'
-import { Form, Input, Button, Radio, Tag, notification } from 'antd';
+import { Form, Input, Button, Radio } from 'antd';
 import { ScanDir, result2Text, createReadme } from '../../util/document2readme.js'
 import Taglist from './components/Taglist.js'
 
@@ -66,11 +65,10 @@ class Doc2Readme extends Component {
           <Form.Item label="文件标题">{getFieldDecorator('documentTitle', documentTitleDecorator)
             (<Input type="text" style={{ width: '400px' }} placeholder="请输入文件标题" />)}</Form.Item>
           <br />
-          <Form.Item label="被忽略的文件夹/文件">
-            <Taglist list={folder} kind='folder' handleDeleteTag={handleDeleteTag}></Taglist><br />
-            <Taglist list={file} kind='file' handleDeleteTag={handleDeleteTag}></Taglist><br />
-            {/* <Taglist folder={this.state.ignore.folder} file={this.state.ignore.file} handleDeleteTag={handleDeleteTag}></Taglist><br /> */}
-          </Form.Item>
+          <Form.Item label="被忽略的文件夹/文件"></Form.Item>
+          <br />
+          <Taglist list={folder} kind='folder' handleDeleteTag={handleDeleteTag}></Taglist>
+          <Taglist list={file} kind='file' handleDeleteTag={handleDeleteTag}></Taglist>
           <Form.Item>
             <Radio.Group onChange={(e) => { this.setState({ radioValue: e.target.value }) }} value={this.state.radioValue}>
               <Radio value={'folder'}>文件夹</Radio>
@@ -84,7 +82,6 @@ class Doc2Readme extends Component {
                   [radioValue]: [...this.state.ignore[radioValue], value]
                 }
               })
-              console.log(this.state.ignore[radioValue])
               handleAddIngore(radioValue, value)
             }}>添加</Button>
           </Form.Item>
@@ -105,13 +102,16 @@ class Doc2Readme extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  readmeText: state.getIn(['Doc2Readme', 'formData', 'readmeText']),
-  showReadmeText: state.getIn(['Doc2Readme', 'formData', 'showReadmeText']),
-  saveBtnDisabled: state.getIn(['Doc2Readme', 'formData', 'saveBtnDisabled']),
-  folder: state.getIn(['Doc2Readme', 'formData', 'ignore', 'folder']),
-  file: state.getIn(['Doc2Readme', 'formData', 'ignore', 'file']),
-})
+const mapStateToProps = (state) => {
+  return {
+    readmeText: state.getIn(['Doc2Readme', 'formData', 'readmeText']),
+    showReadmeText: state.getIn(['Doc2Readme', 'formData', 'showReadmeText']),
+    saveBtnDisabled: state.getIn(['Doc2Readme', 'formData', 'saveBtnDisabled']),
+    folder: state.getIn(['Doc2Readme', 'formData', 'ignore', 'folder']),
+    // folder: state.toJS().Doc2Readme.formData.ignore.folder,
+    file: state.getIn(['Doc2Readme', 'formData', 'ignore', 'file']),
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
   // 删除`应忽略的文件/文件夹`的tag
