@@ -18,6 +18,7 @@ app.on('ready', () => {
     height: 750,
     webPreferences: {
       nodeIntegration: true,
+      webSecurity: false
       // preload: path.join(__dirname, 'preload.js')
     }
   })
