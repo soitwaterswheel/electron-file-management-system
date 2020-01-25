@@ -42,11 +42,6 @@ class Doc2Readme extends Component {
       }
     })
   }
-  // 将readme文本保存为文件
-  // handleSaveReadme() {
-  //   let prePath = this.props.form.getFieldValue('documentPath')
-  //   createReadme(this.state.readmeText, prePath).then(data => { notification.open({ message: '保存成功' }) }).catch((err) => notification.open({ message: '保存失败' }))
-  // }
 
   render() {
     const { readmeText, saveBtnDisabled, showReadmeText, folder, file } = this.props
@@ -54,7 +49,6 @@ class Doc2Readme extends Component {
     const { getFieldDecorator, getFieldValue } = this.props.form
     const documentPathDecorator = { initialValue: 'E:/CSY/CCSY/基础/cs-foundation', rules: [{ required: true, message: '请输入文件路径......' }] }
     const documentTitleDecorator = { initialValue: 'cs-foundation', rules: [{ required: true, message: '请输入Readme.md文件标题......' }] }
-
 
     return (
       <Content>
@@ -108,7 +102,6 @@ const mapStateToProps = (state) => {
     showReadmeText: state.getIn(['Doc2Readme', 'formData', 'showReadmeText']),
     saveBtnDisabled: state.getIn(['Doc2Readme', 'formData', 'saveBtnDisabled']),
     folder: state.getIn(['Doc2Readme', 'formData', 'ignore', 'folder']),
-    // folder: state.toJS().Doc2Readme.formData.ignore.folder,
     file: state.getIn(['Doc2Readme', 'formData', 'ignore', 'file']),
   }
 }
