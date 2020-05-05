@@ -1,6 +1,8 @@
 import * as constants from './constants.js';
 
-export const getSiderListAction = (show) => ({
-  type: constants.GET_SIDER_LIST,
-  show
-})
+export const changeSider = (headerKeyIndex) => {
+  return {
+    type: constants.CHANGE_SIDER_LIST,
+    value: headerKeyIndex
+  }
+}

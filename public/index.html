@@ -9,13 +9,22 @@
   <meta name="description" content="Web site created using create-react-app" />
   <title>Electron File Management</title>
   <script>
+    window.requireNodeJSModule = {};
     window.electron = require('electron');
     window.fs = require('fs');
+    window.path = require('path');
+    window.cheerio = require('cheerio');
+    window.iconv = require('iconv-lite');
+    window.axios = require('axios');
+    window.path = require('path');
+    window.child_process = require('child_process');
+    window.requireNodeJSModule.lowdb = require('lowdb');
+    window.requireNodeJSModule.lowdbFileSync = require('lowdb/adapters/FileSync');
+    window.requireNodeJSModule.fsExtra = require('fs-extra');
   </script>
 </head>
 
 <body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
 </body>
 
