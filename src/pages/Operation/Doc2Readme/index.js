@@ -2,9 +2,9 @@ import { connect } from 'react-redux'
 import { actionCreators } from './store/index.js'
 import React, { Component } from 'react';
 
-import Content from '../Home/components/content.js'
+import Content from '@/pages/Home/components/content.js'
 import { Form, Input, Button, Radio } from 'antd';
-import { ScanDir, result2Text, createReadme } from '../../util/document2readme.js'
+import { ScanDir, result2Text, createReadme } from '@/util/document2readme.js'
 import Taglist from './components/Taglist.js'
 
 class Doc2Readme extends Component {
@@ -47,7 +47,7 @@ class Doc2Readme extends Component {
     const { readmeText, saveBtnDisabled, showReadmeText, folder, file } = this.props
     const { handleSaveReadme, handleDeleteTag, handleAddIngore } = this.props
     const { getFieldDecorator, getFieldValue } = this.props.form
-    const documentPathDecorator = { initialValue: 'E:/CSY/CCSY/基础/cs-foundation', rules: [{ required: true, message: '请输入文件路径......' }] }
+    const documentPathDecorator = { initialValue: 'E:/S/S/基础/cs-foundation', rules: [{ required: true, message: '请输入文件路径......' }] }
     const documentTitleDecorator = { initialValue: 'cs-foundation', rules: [{ required: true, message: '请输入Readme.md文件标题......' }] }
 
     return (

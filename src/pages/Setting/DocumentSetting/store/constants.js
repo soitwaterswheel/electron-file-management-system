@@ -1,0 +1,1 @@
+export const SET_USER_MESSAGE_PATH = 'setting/set_UserMessagePath';

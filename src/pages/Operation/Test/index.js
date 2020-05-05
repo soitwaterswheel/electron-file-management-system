@@ -1,10 +1,11 @@
 import React, { Component, useEffect, useState } from 'react';
-import Content from '../Home/components/content.js'
+import Content from '@/pages/Home/components/content.js'
 import { Button } from 'antd';
 import axios from 'axios'
 
 import useMouseTracker from './useMouseTracker.js'
 const ipcRenderer = window.electron.ipcRenderer
+const ipc = window.require('electron').ipcRenderer
 // const { ipcRenderer } = require('electron')
 // const { BrowserWindow } = require('electron').remote
 
@@ -33,6 +34,7 @@ const Test = () => {
     <Content>
       <h1>{position.x}; {position.y}</h1>
       <Button onClick={() => { setFetch(!fetch) }}>下一张</Button>
+      <Button onClick={() => { ipc.send('show-context-menu') }}>ipc</Button>
       <Button onClick={() => { console.log('??-??'); ipcRenderer.sendSync('message', 'ipc: test to main.js') }}> ipc</Button>
       {loading ? <p>loading ...</p> : <img alt="dog" src={url} style={{ width: '200px' }}></img>}
     </Content>

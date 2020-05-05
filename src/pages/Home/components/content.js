@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Children } from 'react';
 import { Layout } from 'antd';
 const { Content } = Layout;
 class ContentPage extends Component {
@@ -12,7 +12,12 @@ class ContentPage extends Component {
           minHeight: '100%',
         }}
       >
-        { this.props.children }
+        {this.props.children}
+        {/* {
+          Children.map(this.props.children, function (child) {
+            return <>{child}</>
+          })
+        } */}
       </Content>
     )
   }

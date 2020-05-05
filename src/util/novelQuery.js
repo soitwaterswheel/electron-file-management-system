@@ -49,6 +49,4 @@ async function requestNewPage(path) {
   })
 }
 
-
-
 export { getLinks, getDemoPage, catchWebsite }

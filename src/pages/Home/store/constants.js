@@ -1,1 +1,1 @@
-export const GET_SIDER_LIST = 'home/GET_SIDER_LIST';
+export const CHANGE_SIDER_LIST = 'home/CHANGE_SIDER_LIST';
